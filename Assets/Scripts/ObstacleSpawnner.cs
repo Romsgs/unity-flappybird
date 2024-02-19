@@ -9,6 +9,10 @@ public class ObstacleSpawnner : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.IsGameOVer())
+        {
+            return;
+        }
         Cooldown -= Time.deltaTime;
 
         if (Cooldown <= 0f)

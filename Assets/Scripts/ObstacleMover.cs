@@ -6,8 +6,7 @@ public class ObstacleMover : MonoBehaviour
 {
 
 
-    public float maxEsquerda = -10;
-    public float ObstacleOrigin = 10;
+    public float maxEsquerda = -13;
 
 
     // Start is called before the first frame update
@@ -19,6 +18,10 @@ public class ObstacleMover : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (GameManager.Instance.IsGameOVer())
+        {
+            return;
+        }
 
         float x = GameManager.Instance.ObstacleSpeed * Time.fixedDeltaTime;
         transform.position -= new Vector3(x, 0, 0);

@@ -21,8 +21,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool isgameActive = GameManager.Instance.IsGameActive();
+
         jumpCooldown -= Time.deltaTime;
-        canJump = jumpCooldown <= 0;
+        canJump = jumpCooldown <= 0 && isgameActive;
 
         // Jump!
         if (canJump)
@@ -33,11 +35,13 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
         }
+        thisRigidBody.useGravity = isgameActive;
     }
     private void OnCollisionEnter(Collision other)
     {
+        GameManager.Instance.endGame();
+        Debug.Log("Game Over, your score was " + GameManager.Instance.score);
 
-        Debug.Log("Game Over");
 
     }
     private void OnTriggerEnter(Collider other)
